@@ -3,6 +3,7 @@
 mvnw
 mvnw.cmd
 
+.zprofile
 
 #Maven
 target/
