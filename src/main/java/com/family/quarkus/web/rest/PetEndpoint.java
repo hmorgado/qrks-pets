@@ -112,17 +112,19 @@ public class PetEndpoint {
         namesList.add("jerry");
         namesList.add("geraldo");
 
-        int randomNameIndex = new Random().nextInt(0, namesList.toArray().length - 1);
+        for (int i = 0; i < 5; i++) {
+            int randomNameIndex = new Random().nextInt(0, namesList.toArray().length - 1);
 
-        String name = namesList.get(randomNameIndex);
-        Pet pet = new Pet();
-        pet.setName(name);
+            String name = namesList.get(randomNameIndex);
+            Pet pet = new Pet();
+            pet.setName(name);
 
-        int randomTypeIndex = new Random().nextInt(1, 7);
+            int randomTypeIndex = new Random().nextInt(1, 7);
 
-        PetType petType = this.petTypeService.getPetType(randomTypeIndex);
-        pet.setPetType(petType);
+            PetType petType = this.petTypeService.getPetType(randomTypeIndex);
+            pet.setPetType(petType);
 
-        this.petService.addPet(pet);
+            this.petService.addPet(pet);
+        }
     }
 }
