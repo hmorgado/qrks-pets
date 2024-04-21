@@ -10,6 +10,7 @@ import org.jboss.resteasy.reactive.ResponseHeader;
 import org.jboss.resteasy.reactive.ResponseStatus;
 import org.jboss.resteasy.reactive.RestPath;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -96,15 +97,34 @@ public class PetEndpoint {
     @ResponseStatus(200)
     public void generatePets(){
         print("called generatePets()");
-        String name = "generated";
-        Pet pet = new Pet();
-        pet.setName(name);
 
-        int randomIndex = new Random().nextInt(1, 4);
+        ArrayList<String> namesList = new ArrayList<>();
 
-        PetType petType = this.petTypeService.getPetType(randomIndex);
-        pet.setPetType(petType);
+        namesList.add("walky");
+        namesList.add("walker");
+        namesList.add("gus");
+        namesList.add("gussolini");
+        namesList.add("ben");
+        namesList.add("heitor");
+        namesList.add("lindsay");
+        namesList.add("mr bear");
+        namesList.add("mrs bear");
+        namesList.add("jerry");
+        namesList.add("geraldo");
 
-        this.petService.addPet(pet);
+        for (int i = 0; i < 5; i++) {
+            int randomNameIndex = new Random().nextInt(0, namesList.toArray().length - 1);
+
+            String name = namesList.get(randomNameIndex);
+            Pet pet = new Pet();
+            pet.setName(name);
+
+            int randomTypeIndex = new Random().nextInt(1, 7);
+
+            PetType petType = this.petTypeService.getPetType(randomTypeIndex);
+            pet.setPetType(petType);
+
+            this.petService.addPet(pet);
+        }
     }
 }
